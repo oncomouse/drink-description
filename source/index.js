@@ -12,31 +12,31 @@ const drinkDescriptionModifiers = Object.assign({
 }, tracery.baseEngModifiers);
 const additionalTikiPhrases = {
 	'Exotic Spices': [
-		'cinnamon',
-		'vanilla',
-		'allspice',
-		'falernum'
+		'Cinnamon',
+		'Vanilla',
+		'Allspice Dram',
+		'Falernum'
 	],
 	'Fresh Juices': [
-		'grapefruit',
-		'lime',
-		'lemon',
-		'orange',
-		'pineapple'
-	],
-	'Fruit Flavors': [
-		'grenadine',
-		'pear',
-		'peach',
-		'apricot',
-		'blackberry',
-		'falernum'
-	]
+		'Grapefruit',
+		'Lime',
+		'Lemon',
+		'Orange',
+		'Pineapple'
+	]//,
+	//'Fruit Flavors': [
+	//	'grenadine',
+	//	'pear',
+	//	'peach',
+	//	'apricot',
+	//	'blackberry',
+	//	'falernum'
+	//]
 }
 
 const substituteAdditionalTikiIngredients = (ingredients) => {
 	
-	_.each(additionalTikiPhrases,(ingredientList, tikiPhrase) => _.reduce(ingredientList, (needsPhrase, ingredient) => (needsPhrase ? true : _.includes(ingredients, ingredient)), false) ? ingredients.push(tikiPhrase) : null);
+	//_.each(additionalTikiPhrases,(ingredientList, tikiPhrase) => _.reduce(ingredientList, (needsPhrase, ingredient) => (needsPhrase ? true : _.includes(ingredients, ingredient)), false) ? ingredients.push(tikiPhrase) : null);
 	
 	return ingredients;
 }

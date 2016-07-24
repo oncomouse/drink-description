@@ -1,0 +1,20 @@
+{
+	"tiki-adjective":["Sophisticated", "Exotic", "Mysterious", "Delectable", "Mystical", "Indulgent", "Luxurious", "Intoxicating", "Beguiling", "Remarkable", "Delightful", "Surprising", "Relaxing", "Refreshing"],
+	"tiki-noun": ["Symphony", "Explosion", "#tiki-voyage#", "Sensation", "Elixir", "Siren's call", "Brew", "Rhapsody"],
+	"tiki-voyage": ["Voyage", "Journey", "Expedition", "Pilgrimage"],
+	"tiki-process-verb": ["Craft", "Harmonize", "Whisper"],
+	"tiki-past-tense": ["Blended with", "#tiki-process-verb.ed# with", "Bestirred by", "Meets", "Lengthened with"],
+	"tiki-comparator": ["the Pacific Ocean", "a Hawaiian Sunset", "an Afternoon Breeze on Tahiti", "a Hammock by the Sea", "#tiki-adjective.capitalize.a# Clipper Ship"],
+	"tiki-speak": ["Whispers to", "Sings to", "Harmonizes with", "Summons"],
+	"tiki-sentence": [
+		"#tiki-noun.a.capitalize# of #ingredient-list#",
+		"Take #tiki-adjective.a# #tiki-voyage# with #ingredient-list#",
+		"Experience the #tiki-adjective# #tiki-noun# of #ingredient-list#",
+		"#ingredient-list.capitalize# #tiki-process-verb# #tiki-adjective.a# #tiki-voyage#",
+		"#ingredient.capitalize# #tiki-past-tense# #ingredient-list#",
+		"As #tiki-adjective# as #tiki-comparator#",
+		"#ingredient# Embarks on #tiki-voyage.a# with #ingredient-list#",
+		"#ingredient# #tiki-speak# #tiki-noun.a# of #ingredient-list#"
+	],
+	"origin": "#tiki-sentence#."
+}

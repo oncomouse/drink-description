@@ -1,6 +1,6 @@
 {
 	"tiki-adjective":["Sophisticated", "Exotic", "Mysterious", "Delectable", "Mystical", "Indulgent", "Luxurious", "Intoxicating", "Beguiling", "Remarkable", "Delightful", "Surprising", "Relaxing", "Refreshing"],
-	"tiki-noun": ["Symphony", "Explosion", "#tiki-voyage#", "Sensation", "Elixir", "Siren's call", "Brew", "Rhapsody"],
+	"tiki-noun": ["Symphony", "Explosion", "#tiki-voyage#", "Sensation", "Elixir", "Siren's Call", "Brew", "Rhapsody"],
 	"tiki-voyage": ["Voyage", "Journey", "Expedition", "Pilgrimage"],
 	"tiki-process-verb": ["Craft", "Harmonize", "Whisper"],
 	"tiki-past-tense": ["Blended with", "#tiki-process-verb.ed# with", "Bestirred by", "Meets", "Lengthened with"],

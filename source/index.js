@@ -49,7 +49,7 @@ export default (ingredients, useCache=true) => {
 	} else {
 		let localSrc = Object.assign({}, grammarSrc);
 		
-		let rums = _.remove(ingredients, (x) => x.match(/(Rum|Rhum)$/) !== null);
+		let rums = _.remove(ingredients, (x) => x.match(/(Rum|Rhum)/) !== null);
 		if(rums.length >= 1) {
 			ingredients.push('Rum');
 		}

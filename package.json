@@ -1,6 +1,6 @@
 {
   "name": "drink-description",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./distribution/index.js",
   "jsnext:main": "./distribution/es6.js",
   "scripts": {

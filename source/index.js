@@ -8,7 +8,7 @@ let grammarCache = Map();
 const drinkDescriptionModifiers = Object.assign({
 	// helper functions go here!
 	foobar: (s) => s,
-	tikify: (s) => s.replace(/ syrup/ig,'').replace(/ brandy/ig,'').replace(/ liqueur/ig,'').replace(/(demerara|orgeat|honey)/ig, 'Exotic Syrups') // Remove "brandy", "liqueur" and "syrup", replace "demerara", "honey", and "orgeat" with "Exotic Syrups"
+	tikify: (s) => s.replace(/ syrup/ig,'').replace(/ brandy/ig,'').replace(/ liqueur/ig,'').replace(/(demerara|orgeat|honey)/ig, 'Exotic Syrups').replace(/ Ale\/Beer/,' Ale').replace(' Heering','').replace(' Fruit','') // Remove "brandy", "liqueur" and "syrup", replace "demerara", "honey", and "orgeat" with "Exotic Syrups"
 }, tracery.baseEngModifiers);
 const additionalTikiPhrases = {
 	'Exotic Spices': [
@@ -56,7 +56,8 @@ export default (ingredients, useCache=true) => {
 		
 		ingredients = _.map(ingredients, (x) => drinkDescriptionModifiers.tikify(x));
 		ingredients = substituteAdditionalTikiIngredients(ingredients);
-		_.remove(ingredients, (x) => x.match(/bitters$/i) !== null || x.match(/(lime|lemon)/i) !== null); // Remove bitters and lemon/lime
+		_.remove(ingredients, (x) => x.match(/bitters$/i) !== null || x.match(/(lime|lemon)/i) !== null || x.match(/herbstura/i) !== null || x.match(/seltzer/i) !== null); // Remove bitters and lemon/lime
+		
 		ingredients = _.uniq(ingredients);
 		
 		let ingredientList = _.map(permutations(ingredients, 2), (x) => x.join(' and ')).concat(_.map(permutations(ingredients, 3), (x) => `${x[0]}, ${x[1]}, and ${x[2]}`));

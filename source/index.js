@@ -60,7 +60,10 @@ export default (ingredients, useCache=true) => {
 		
 		ingredients = _.uniq(ingredients);
 		
-		let ingredientList = _.map(permutations(ingredients, 2), (x) => x.join(' and ')).concat(_.map(permutations(ingredients, 3), (x) => `${x[0]}, ${x[1]}, and ${x[2]}`));
+		let ingredientList = _.map(permutations(ingredients, 2), (x) => x.join(' and '));
+		if(ingredients.length > 3) {
+			ingredientList.concat(_.map(permutations(ingredients, 3), (x) => `${x[0]}, ${x[1]}, and ${x[2]}`));
+		}
 		
 		localSrc.ingredient = ingredients;
 		localSrc['ingredient-list'] = ingredientList;
@@ -95,7 +98,7 @@ export default (ingredients, useCache=true) => {
 				output = output.replace(x,_.sample(sourceToReplaceFrom))
 			});
 		} else {
-			output = grammar.flatten('As #tiki-adjective# as #tiki-comparator#'); // If there aren't enough ingredients, fire a different rule
+			output = grammar.flatten('As #tiki-adjective# as #tiki-comparator#.'); // If there aren't enough ingredients, fire a different rule
 		}
 	}
 	

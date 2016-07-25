@@ -8,7 +8,7 @@ let grammarCache = Map();
 const drinkDescriptionModifiers = Object.assign({
 	// helper functions go here!
 	foobar: (s) => s,
-	tikify: (s) => s.replace(/ syrup/ig,'').replace(/ brandy/ig,'').replace(/ liqueur/ig,'').replace(/(demerara|orgeat|honey)/ig, '#tiki-adjective# Syrup').replace('Ale/Beer','Ale').replace(' Heering','').replace('Pineapple Fruit','Pineapple') // Remove "brandy", "liqueur" and "syrup", replace "demerara", "honey", and "orgeat" with "Exotic Syrup"
+	tikify: (s) => s.replace(/ syrup/ig,'').replace(/ brandy/ig,'').replace(/ liqueur/ig,'').replace(/(demerara|orgeat|honey)/ig, 'Exotic Syrup').replace('Ale/Beer','Ale').replace(' Heering','').replace('Pineapple Fruit','Pineapple') // Remove "brandy", "liqueur" and "syrup", replace "demerara", "honey", and "orgeat" with "Exotic Syrup"
 }, tracery.baseEngModifiers);
 
 export default (ingredients, useCache=true) => {

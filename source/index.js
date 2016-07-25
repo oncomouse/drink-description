@@ -8,38 +8,8 @@ let grammarCache = Map();
 const drinkDescriptionModifiers = Object.assign({
 	// helper functions go here!
 	foobar: (s) => s,
-	tikify: (s) => s.replace(/ syrup/ig,'').replace(/ brandy/ig,'').replace(/ liqueur/ig,'').replace(/(demerara|orgeat|honey)/ig, 'Exotic Syrups').replace(/ Ale\/Beer/,' Ale').replace(' Heering','').replace('Pineapple Fruit','Pineapple') // Remove "brandy", "liqueur" and "syrup", replace "demerara", "honey", and "orgeat" with "Exotic Syrups"
+	tikify: (s) => s.replace(/ syrup/ig,'').replace(/ brandy/ig,'').replace(/ liqueur/ig,'').replace(/(demerara|orgeat|honey)/ig, '#tiki-adjective# Syrup').replace('Ale/Beer','Ale').replace(' Heering','').replace('Pineapple Fruit','Pineapple') // Remove "brandy", "liqueur" and "syrup", replace "demerara", "honey", and "orgeat" with "Exotic Syrup"
 }, tracery.baseEngModifiers);
-const additionalTikiPhrases = {
-	'Exotic Spices': [
-		'Cinnamon',
-		'Vanilla',
-		'Allspice Dram',
-		'Falernum'
-	],
-	'Fresh Juices': [
-		'Grapefruit',
-		'Lime',
-		'Lemon',
-		'Orange',
-		'Pineapple'
-	]//,
-	//'Fruit Flavors': [
-	//	'grenadine',
-	//	'pear',
-	//	'peach',
-	//	'apricot',
-	//	'blackberry',
-	//	'falernum'
-	//]
-}
-
-const substituteAdditionalTikiIngredients = (ingredients) => {
-	
-	//_.each(additionalTikiPhrases,(ingredientList, tikiPhrase) => _.reduce(ingredientList, (needsPhrase, ingredient) => (needsPhrase ? true : _.includes(ingredients, ingredient)), false) ? ingredients.push(tikiPhrase) : null);
-	
-	return ingredients;
-}
 
 export default (ingredients, useCache=true) => {
 	const cacheKey = _.chain(ingredients).map((x) => x.toLowerCase()).sort().value().join('');
@@ -50,13 +20,19 @@ export default (ingredients, useCache=true) => {
 		let localSrc = Object.assign({}, grammarSrc);
 		
 		let rums = _.remove(ingredients, (x) => x.match(/(Rum|Rhum)/) !== null);
-		if(rums.length >= 1) {
+		if(rums.length > 0) {
 			ingredients.push('Rum');
 		}
 		
 		ingredients = _.map(ingredients, (x) => drinkDescriptionModifiers.tikify(x));
-		ingredients = substituteAdditionalTikiIngredients(ingredients);
-		_.remove(ingredients, (x) => x.match(/bitters$/i) !== null || x.match(/(lime|lemon)/i) !== null || x.match(/herbstura/i) !== null || x.match(/seltzer/i) !== null); // Remove bitters and lemon/lime
+		
+		// Replace mentions of citrus fruit with "Citrus":
+		let removedFruit = _.remove(ingredients, (x) => x.match(/(lime|lemon|grapefruit|orange)/i) !== null);
+		if(removedFruit.length > 0) {
+			ingredients.push('Citrus');
+		}
+		// Don't display bitters, seltzer, or herbstura:
+		_.remove(ingredients, (x) => x.match(/bitters$/i) !== null || x.match(/herbstura/i) !== null || x.match(/seltzer/i) !== null); // Remove bitters and lemon/lime
 		
 		ingredients = _.uniq(ingredients);
 		
@@ -68,6 +44,7 @@ export default (ingredients, useCache=true) => {
 		localSrc.ingredient = ingredients;
 		localSrc['ingredient-list'] = ingredientList;
 		
+		// Load up on strong drink descriptors:
 		if(rums.length > 2) {
 			localSrc['tiki-adjective'].concat([
 				'Lethal',
@@ -98,7 +75,11 @@ export default (ingredients, useCache=true) => {
 				output = output.replace(x,_.sample(sourceToReplaceFrom))
 			});
 		} else {
-			output = grammar.flatten('As #tiki-adjective# as #tiki-comparator#.'); // If there aren't enough ingredients, fire a different rule
+			output = grammar.flatten(_.sample([
+				'As #tiki-adjective# as #tiki-comparator#.',
+				'#tiki-noun.a.capitalize# of #ingredient# and #ingredient#.',
+				'Take #tiki-adjective.a# #tiki-voyage# with #ingredient# and #ingredient#.'
+			])); // If there aren't enough ingredients, fire a different rule
 		}
 	}
 	

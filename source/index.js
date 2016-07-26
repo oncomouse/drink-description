@@ -46,7 +46,7 @@ export default (ingredients, useCache=true) => {
 		
 		// Load up on strong drink descriptors:
 		if(rums.length > 2) {
-			localSrc['tiki-adjective'].concat([
+			localSrc['tiki-adjective'] = localSrc['tiki-adjective'].concat([
 				'Lethal',
 				'Powerful',
 				'Spiritous',

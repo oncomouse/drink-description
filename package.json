@@ -1,11 +1,11 @@
 {
   "name": "drink-description",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "main": "./distribution/index.js",
   "jsnext:main": "./distribution/es6.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"build": "babel source --presets babel-preset-es2015 --out-dir distribution",
+	"build": "babel-node scripts/build.js",
 	"prepublish": "npm run build && cp source/index.js distribution/es6.js && cp -r source/data distribution && cp -r source/lib distribution"
   },
   "author": "Andrew Pilsch <apilsch@tamu.edu> (http://andrew.pilsch.com)",

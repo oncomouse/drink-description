@@ -1,10 +1,9 @@
 import tracery from 'tracery-grammar';
 import _ from 'lodash';
-import { Map } from 'immutable';
 import { permutations } from './lib/permutations';
 import grammarSrc from './data/grammar.json';
 
-let grammarCache = Map();
+let grammarCache = {};
 const drinkDescriptionModifiers = Object.assign({
 	// helper functions go here!
 	foobar: (s) => s,
@@ -14,8 +13,8 @@ const drinkDescriptionModifiers = Object.assign({
 export default (ingredients, useCache=true) => {
 	const cacheKey = _.chain(ingredients).map((x) => x.toLowerCase()).sort().value().join('');
 	let grammar = undefined;
-	if(useCache && grammarCache.has(cacheKey)) {
-		[grammar, ingredients] = grammarCache.get(cacheKey);
+	if(useCache && _.has(grammarCache, cacheKey)) {
+		[grammar, ingredients] = grammarCache[cacheKey];
 	} else {
 		let localSrc = Object.assign({}, grammarSrc);
 		
@@ -58,7 +57,7 @@ export default (ingredients, useCache=true) => {
 		grammar = tracery.createGrammar(localSrc);
 		grammar.addModifiers(drinkDescriptionModifiers);
 		if(useCache) {
-			grammarCache = grammarCache.set(cacheKey, [grammar, ingredients]);
+			grammarCache[cacheKey] = [grammar, ingredients];
 		}
 	}
 	
@@ -87,10 +86,10 @@ export default (ingredients, useCache=true) => {
 }
 
 export const saveCache = (fileName=undefined) => {
-	const src = JSON.stringify(grammarCache.toJS());
+	const src = JSON.stringify(grammarCache);
 	return src;
 }
 
 export const loadCache = (json) => {
-	grammarCache = Map(json);
+	grammarCache = JSON.parse(json);
 }

@@ -1,5 +1,7 @@
 # drink-description
 
+Generate tiki drink descriptions.
+
 This library uses [tracery](https://github.com/v21/tracery/) to generate descriptions of tropical (tiki) cocktails from lists of ingredients. The description grammar was sourced from menus at [Smuggler's Cove](http://www.smugglerscovesf.com/), [Latitude 29](http://www.latitude29nola.com/), [Trader Vic's](http://tradervicsatl.com/), and the [UNLV Libraries' Menus Collection](http://digital.library.unlv.edu/objects/menus) (which contains several historic Don the Beachcomber Menus).
 
 ## Usage

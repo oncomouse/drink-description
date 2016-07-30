@@ -14,7 +14,8 @@
 		"#ingredient.capitalize# #tiki-past-tense# #ingredient-list#",
 		"As #tiki-adjective# as #tiki-comparator#",
 		"#ingredient# Embarks on #tiki-voyage.a# with #ingredient-list#",
-		"#ingredient# #tiki-speak# #tiki-noun.a# of #ingredient-list#"
+		"#ingredient# #tiki-speak# #tiki-noun.a# of #ingredient-list#",
+		"Cool your jets with #ingredient-list#"
 	],
 	"origin": "#tiki-sentence#."
 }

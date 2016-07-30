@@ -25,7 +25,7 @@ module.exports = {
 						query: {
 							cacheDirectory: true,
 							presets: ['es2015-native-modules'],
-							plugins: ['transform-runtime','add-module-exports']
+							plugins: ['transform-runtime']
 						},
 						
 					}

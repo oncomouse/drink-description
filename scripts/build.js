@@ -1,22 +1,16 @@
 import fs from 'fs';
 import path from 'path';
-import {transform} from 'babel-core';
+import webpack from 'webpack';
 
 const pathRoot = path.dirname(process.argv[1]);
 
-let babelRC = {}
-try {
-	babelRC = JSON.parse(fs.readFileSync(path.resolve(pathRoot, '../.babelrc')));
-} catch(e) {}
+const nodeCompiler = webpack(require(path.resolve(pathRoot, '../webpack.node.js')));
+const browserCompiler = webpack(require(path.resolve(pathRoot, '../webpack.browser.js')));
 
-let indexSrc = fs.readFileSync(path.resolve(pathRoot, '../source/index.js')).toString();
-const grammarSrc = fs.readFileSync(path.resolve(pathRoot, '../source/data/grammar.json')).toString();
-const permutationSrc = fs.readFileSync(path.resolve(pathRoot, '../source/lib/permutations.js')).toString().replace('var _ = require(\'lodash\')','').replace('module.exports={combinations_with_replacement,combinations,product,permutations}','');
+nodeCompiler.run((err,stats) => {
+	fs.unlink(path.resolve(pathRoot, '../distribution/index.js.map'));
+});
+browserCompiler.run((err,stats) => {
+	fs.writeFileSync(path.resolve(pathRoot, '../browser/drink-description.min.js'), fs.readFileSync(path.resolve(pathRoot, '../browser/drink-description.min.js')).toString().replace(/(drinkDescription=.*?\(\))/g,"$1.default"));
 
-indexSrc = indexSrc.replace('import grammarSrc from \'./data/grammar.json\'', `const grammarSrc = ${grammarSrc}`);
-indexSrc = indexSrc.replace('import { permutations } from \'./lib/permutations\';', permutationSrc);
-
-const es5indexSrc = transform(indexSrc, babelRC).code;
-
-fs.writeFileSync(path.resolve(pathRoot, '../distribution/index.js'), es5indexSrc);
-fs.writeFileSync(path.resolve(pathRoot, '../distribution/es6.js'), indexSrc);
+});
